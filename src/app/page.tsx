@@ -15,43 +15,56 @@ import { db, filesAttachmentBucket, filesCollection } from "@/models/name";
 import { ID, UploadProgress } from "appwrite";
 import { useRef, useState } from "react";
 import "./style.css";
+import { FileContext, useAppContext } from "@/context/contextProvider";
+import { useRouter } from "next/navigation";
+import ProgressBar from "@/components/ProgressBar";
 
 export default function Home() {
   const toast = useToast();
-  const [isUploadingFile, setIsUploadingFile] = useState<boolean>(false);
+  const [isUploadingFile, setIsUploadingFile] = useState({
+    isUploading: false,
+    uploadCompleted: false,
+  });
   const progressRef = useRef<HTMLDivElement | null>(null);
+  const inputFileRef = useRef<HTMLInputElement | null>(null);
+  const { setFileId } = useAppContext() as FileContext;
+  const router = useRouter();
 
+  // upload file
   const onDrop = async (acceptedFiles: any) => {
     if (acceptedFiles.length > 0) {
       // upload file
-      setIsUploadingFile(true);
+      setIsUploadingFile({
+        isUploading: true,
+        uploadCompleted: false,
+      });
+
       try {
         const file = await storage.createFile(
           filesAttachmentBucket,
           ID.unique(),
           acceptedFiles[0],
           undefined,
-          (uploadprogress: UploadProgress) => {
+          (uploadProgress: UploadProgress) => {
+            console.log(uploadProgress);
             if (progressRef.current) {
-              progressRef.current.style.width = `${uploadprogress.progress}%`;
+              progressRef.current.style.width = `${uploadProgress.progress}%`;
             }
           }
         );
 
-        console.log(file);
-
-        // create record in databse
-        if (file.$id) {
-          const uploadedFile = await databases.createDocument(
-            db,
-            filesCollection,
-            ID.unique(),
-            {
-              file_id: file.$id,
-              sender_email: "abc@mail.com",
-            }
-          );
+        if (progressRef.current) {
+          progressRef.current.style.width = "100%";
         }
+
+        setFileId(file.$id);
+
+        setIsUploadingFile({
+          isUploading: false,
+          uploadCompleted: true,
+        });
+
+        router.push("/generate-link");
       } catch (error) {
         toast({
           status: "error",
@@ -60,22 +73,31 @@ export default function Home() {
           position: "bottom",
           duration: 1200,
         });
-      } finally {
-        setIsUploadingFile(false);
+
+        setIsUploadingFile({
+          isUploading: false,
+          uploadCompleted: false,
+        });
       }
     }
   };
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
   return (
-    <Container maxW={"7xl"} {...getRootProps()}>
+    <Container
+      maxW={"7xl"}
+      {...getRootProps()}
+      onClick={() => {
+        return;
+      }}
+    >
       <Stack
         textAlign={"center"}
         align={"center"}
         spacing={{ base: 8, md: 10 }}
         py={{ base: 20, md: 28 }}
       >
-        <input {...getInputProps()} />
+        <input {...getInputProps()} ref={inputFileRef} />
         <Heading
           fontWeight={600}
           fontSize={{ base: "3xl", sm: "4xl", md: "6xl" }}
@@ -94,44 +116,42 @@ export default function Home() {
 
         <Box
           w={"100%"}
-          display={"flex"}
+          display={
+            isUploadingFile.isUploading || isUploadingFile.uploadCompleted
+              ? "none"
+              : "flex"
+          }
           flexDir={"column"}
           alignItems={"center"}
           gap={"10px"}
         >
-          {!isUploadingFile && (
-            <>
-              {" "}
-              <Button
-                colorScheme={"orange"}
-                bg={"orange.400"}
-                _hover={{ bg: "orange.500" }}
-                fontSize={"30px"}
-                width={"25%"}
-                height={"80px"}
-              >
-                Select file
-              </Button>
-              <Text color={"gray.500"} maxW={"3xl"} textAlign={"center"}>
-                or drop here!
-              </Text>
-            </>
-          )}
+          {" "}
+          <Button
+            colorScheme={"orange"}
+            bg={"orange.400"}
+            _hover={{ bg: "orange.500" }}
+            fontSize={"30px"}
+            width={"25%"}
+            height={"80px"}
+            onClick={() => {
+              inputFileRef?.current?.click();
+            }}
+          >
+            Select file
+          </Button>
+          <Text color={"gray.500"} maxW={"3xl"} textAlign={"center"}>
+            or drop here!
+          </Text>
+        </Box>
 
-          {isUploadingFile && (
-            <div className="progress">
-              <div className="bar" ref={progressRef}>
-                <div className="progress-value"></div>
-              </div>
-              <div
-                style={{
-                  marginTop: "20px",
-                }}
-              >
-                Uploading...
-              </div>
-            </div>
-          )}
+        <Box
+          display={
+            isUploadingFile.isUploading || isUploadingFile.uploadCompleted
+              ? "block"
+              : "none"
+          }
+        >
+          <ProgressBar progressRef={progressRef} />
         </Box>
       </Stack>
 

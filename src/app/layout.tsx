@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { ChakraUiProvider } from "./ChakraUiProvider";
 import Navbar from "@/components/Navbar";
+import { AppContextProvider } from "@/context/contextProvider";
+import { Footer } from "@/components/Footer";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -31,8 +33,11 @@ export default function RootLayout({
         suppressHydrationWarning={true}
       >
         <ChakraUiProvider>
-          <Navbar />
-          {children}
+          <AppContextProvider>
+            <Navbar />
+            {children}
+            <Footer />
+          </AppContextProvider>
         </ChakraUiProvider>
       </body>
     </html>

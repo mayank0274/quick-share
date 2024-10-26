@@ -7,9 +7,18 @@
 }
 
 .progress .bar {
-  width: 0%;
+  width: 10%;
   height: 100%;
   background: orange;
   background-repeat: repeat;
   box-shadow: 0 0 10px 0px orange;
+}
+
+.rightArrowLink {
+  cursor: pointer;
+}
+
+.rightArrowLink g {
+  color: orange;
+  fill: orange;
 }

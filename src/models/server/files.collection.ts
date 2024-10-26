@@ -12,15 +12,28 @@ export default async function createFilesCollection() {
   console.log("created : files  collection");
 
   await Promise.all([
-    databases.createStringAttribute(db, filesCollection, "file_id", 100, true),
+    databases.createStringAttribute(db, filesCollection, "fileId", 100, true),
     databases.createStringAttribute(
       db,
       filesCollection,
-      "sender_email",
+      "uploadedBy",
       50,
       true
     ),
+    databases.createBooleanAttribute(
+      db,
+      filesCollection,
+      "isPasswordEnabled",
+      true
+    ),
+    databases.createStringAttribute(
+      db,
+      filesCollection,
+      "password",
+      100,
+      false
+    ),
   ]);
 
-  console.log("created : comment attributes");
+  console.log("created : files attributes");
 }
