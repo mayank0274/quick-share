@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { databases } from "@/models/server/config";
-import { db, filesCollection } from "@/models/name";
+import { databases, storage } from "@/models/server/config";
+import { db, filesAttachmentBucket, filesCollection } from "@/models/name";
 import { ID } from "node-appwrite";
 import bcrypt from "bcryptjs";
 
@@ -23,6 +23,18 @@ export async function POST(req: NextRequest) {
           message: "either disable password protection or enter password",
         },
         { status: 422 }
+      );
+    }
+
+    const targetFile = storage.getFile(filesAttachmentBucket, fileId);
+
+    if (!targetFile) {
+      return NextResponse.json(
+        {
+          success: false,
+          message: "invalid file",
+        },
+        { status: 404 }
       );
     }
 

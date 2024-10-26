@@ -131,7 +131,7 @@ export default function Home() {
             bg={"orange.400"}
             _hover={{ bg: "orange.500" }}
             fontSize={"30px"}
-            width={"25%"}
+            width={{ base: "80%", sm: "80%", md: "25%", lg: "25%" }}
             height={"80px"}
             onClick={() => {
               inputFileRef?.current?.click();
@@ -145,6 +145,7 @@ export default function Home() {
         </Box>
 
         <Box
+          width={"100%"}
           display={
             isUploadingFile.isUploading || isUploadingFile.uploadCompleted
               ? "block"
@@ -159,7 +160,7 @@ export default function Home() {
         <Box
           background={"orange"}
           width={"90%"}
-          minH={"100%"}
+          minH={"80%"}
           position={"absolute"}
           top={20}
           left={20}

@@ -199,12 +199,36 @@ export default function DownloadFile({ params }: { params: Params }) {
                 size={"lg"}
                 mask={true}
               >
-                <PinInputField border={"1px solid #000"} />
-                <PinInputField border={"1px solid #000"} />
-                <PinInputField border={"1px solid #000"} />
-                <PinInputField border={"1px solid #000"} />
-                <PinInputField border={"1px solid #000"} />
-                <PinInputField border={"1px solid #000"} />
+                <PinInputField
+                  border={"1px solid #000"}
+                  borderColor={"gray.500"}
+                  _focusVisible={{ outline: "none", borderColor: "orange" }}
+                />
+                <PinInputField
+                  border={"1px solid #000"}
+                  borderColor={"gray.500"}
+                  _focusVisible={{ outline: "none", borderColor: "orange" }}
+                />
+                <PinInputField
+                  border={"1px solid #000"}
+                  borderColor={"gray.500"}
+                  _focusVisible={{ outline: "none", borderColor: "orange" }}
+                />
+                <PinInputField
+                  border={"1px solid #000"}
+                  borderColor={"gray.500"}
+                  _focusVisible={{ outline: "none", borderColor: "orange" }}
+                />
+                <PinInputField
+                  border={"1px solid #000"}
+                  borderColor={"gray.500"}
+                  _focusVisible={{ outline: "none", borderColor: "orange" }}
+                />
+                <PinInputField
+                  border={"1px solid #000"}
+                  borderColor={"gray.500"}
+                  _focusVisible={{ outline: "none", borderColor: "orange" }}
+                />
               </PinInput>
             </HStack>
 
@@ -228,7 +252,7 @@ export default function DownloadFile({ params }: { params: Params }) {
             bg={"orange.400"}
             _hover={{ bg: "orange.500" }}
             fontSize={"25px"}
-            width={"30%"}
+            width={{ base: "80%", sm: "80%", md: "30%", lg: "30%" }}
             height={"80px"}
             onClick={downloadFile}
             isDisabled={

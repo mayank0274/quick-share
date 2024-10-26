@@ -1,12 +1,4 @@
-.progress {
-  width: 500px;
-  height: 50px;
-  border: 1px solid #fff;
-  padding: 12px 10px;
-  box-shadow: 0 0 10px #aaa;
-}
-
-.progress .bar {
+.bar {
   width: 10%;
   height: 100%;
   background: orange;

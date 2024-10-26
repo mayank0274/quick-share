@@ -17,13 +17,14 @@ import {
   AbsoluteCenter,
   Link,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import FileUploadSuccessIcon from "@/icons/FileUploadSuccessIcon";
 import { FileContext, useAppContext } from "@/context/contextProvider";
 import EmailIcon from "@/icons/EmailIcon";
 import WhatsappIcon from "@/icons/WhatsappIcon";
 import axios from "axios";
 import ShareIcon from "@/icons/ShareIcon";
+import { useRouter } from "next/navigation";
 
 export default function GenerateLink() {
   const [passwordConfig, setPasswordConfig] = useState({
@@ -37,6 +38,13 @@ export default function GenerateLink() {
   const toast = useToast();
   const { fileId } = useAppContext() as FileContext;
   const { onCopy, value, setValue, hasCopied } = useClipboard(downloadUrl);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!fileId) {
+      router.push("/");
+    }
+  }, []);
 
   // create file link
   const saveFileEntry = async () => {
@@ -44,7 +52,7 @@ export default function GenerateLink() {
     const emailRegex = /^[\w\-\.]+@([\w-]+\.)+[\w-]{2,}$/gm;
     const isValidEmail = emailRegex.test(email);
 
-    if (isValidEmail) {
+    if (!isValidEmail) {
       toast({
         status: "error",
         description: "email is not valid",
@@ -132,7 +140,7 @@ export default function GenerateLink() {
       display={"flex"}
       flexDir={"column"}
       gap={"20px"}
-      width={"40%"}
+      width={{ base: "95%", sm: "95%", md: "40%", lg: "40%" }}
       margin={"auto"}
       height={"90%"}
       alignItems={"center"}
@@ -165,6 +173,8 @@ export default function GenerateLink() {
             onChange={(e) => {
               setEmail(e.target.value);
             }}
+            borderColor={"gray.500"}
+            _focusVisible={{ outline: "none", borderColor: "orange" }}
           />
           <Text color={"gray.500"} fontSize={"12px"}>
             Your email will not publicly shown,
@@ -223,12 +233,30 @@ export default function GenerateLink() {
                 size={"md"}
                 mask={true}
               >
-                <PinInputField />
-                <PinInputField />
-                <PinInputField />
-                <PinInputField />
-                <PinInputField />
-                <PinInputField />
+                <PinInputField
+                  borderColor={"gray.500"}
+                  _focusVisible={{ outline: "none", borderColor: "orange" }}
+                />
+                <PinInputField
+                  borderColor={"gray.500"}
+                  _focusVisible={{ outline: "none", borderColor: "orange" }}
+                />
+                <PinInputField
+                  borderColor={"gray.500"}
+                  _focusVisible={{ outline: "none", borderColor: "orange" }}
+                />
+                <PinInputField
+                  borderColor={"gray.500"}
+                  _focusVisible={{ outline: "none", borderColor: "orange" }}
+                />
+                <PinInputField
+                  borderColor={"gray.500"}
+                  _focusVisible={{ outline: "none", borderColor: "orange" }}
+                />
+                <PinInputField
+                  borderColor={"gray.500"}
+                  _focusVisible={{ outline: "none", borderColor: "orange" }}
+                />
               </PinInput>
             </HStack>
           </Box>

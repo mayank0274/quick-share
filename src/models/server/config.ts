@@ -4,8 +4,8 @@ import env from "@/app/env";
 let client = new Client();
 
 client
-  .setEndpoint(env.appWrite.endpoint) // Your API Endpoint
-  .setProject(env.appWrite.projectId) // Your project ID
+  .setEndpoint(env.appWrite.endpoint)
+  .setProject(env.appWrite.projectId)
   .setKey(env.appWrite.apikey)
   .setSelfSigned(true);
 

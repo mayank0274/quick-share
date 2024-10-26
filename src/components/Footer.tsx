@@ -12,11 +12,8 @@ export const Footer: React.FC = () => {
       justifyContent={"center"}
       h={"50px"}
       alignItems={"center"}
-      position={"fixed"}
-      bottom={0}
-      marginTop={"70px"}
-      bgColor={"gray.100"}
-      backdropFilter="blur(2px)"
+      borderTop={"1px solid gray"}
+      // mt={"20px"}
     >
       <Box
         height={"100%"}
@@ -26,13 +23,13 @@ export const Footer: React.FC = () => {
         alignItems={"center"}
       >
         <Text>&copy; QuickShare</Text>
-        <Box display={"flex"} gap={"10px"}>
+        <Box display={"flex"} gap={"10px"} alignItems={"center"}>
           <Link href="/linkedin">
-            <LinkedinIcon height="23px" width="23px" />
+            <LinkedinIcon height="30px" width="30px" />
           </Link>
 
           <Link href={"https://github.com/mayank0274"}>
-            <GithubIcon height="20px" width="20px" />
+            <GithubIcon height="23px" width="25px" />
           </Link>
         </Box>
       </Box>
