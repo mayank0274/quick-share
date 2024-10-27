@@ -4,6 +4,8 @@ Share files effortlessly, securely, and instantly.
 
 Upload file -> generate link with or without password protection -> share with friends or anyone else -> done
 
+https://github.com/user-attachments/assets/ba4b5f16-9cc6-4c14-aef5-6f1b2b7c8278
+
 ### Tech stack
 
 -> Next.js
