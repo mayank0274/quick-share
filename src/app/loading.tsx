@@ -1,4 +1,4 @@
-import { Box, Center, Skeleton, Spinner, Stack } from "@chakra-ui/react";
+import { Skeleton, Stack } from "@chakra-ui/react";
 import React from "react";
 
 type Props = {};

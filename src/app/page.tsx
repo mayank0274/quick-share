@@ -10,8 +10,8 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { useDropzone } from "react-dropzone";
-import { storage, databases } from "@/models/client/config";
-import { db, filesAttachmentBucket, filesCollection } from "@/models/name";
+import { storage } from "@/models/client/config";
+import { filesAttachmentBucket } from "@/models/name";
 import { ID, UploadProgress } from "appwrite";
 import { useRef, useState } from "react";
 import "./style.css";

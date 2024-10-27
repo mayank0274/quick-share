@@ -4,10 +4,6 @@ import GithubIcon from "@/icons/GithubIcon";
 import { Box, Button, Flex, Text } from "@chakra-ui/react";
 import Link from "next/link";
 
-interface Props {
-  children: React.ReactNode;
-}
-
 export default function Navbar() {
   return (
     <>
@@ -31,7 +27,10 @@ export default function Navbar() {
             </Box>
           </Link>
 
-          <Link href={""} target="_blank">
+          <Link
+            href={"https://github.com/mayank0274/quick-share"}
+            target="_blank"
+          >
             <Button colorScheme="gray">
               Check out on Github &nbsp;
               <GithubIcon height="18px" width="18px" />

@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { databases, storage } from "@/models/server/config";
-import { db, filesAttachmentBucket, filesCollection } from "@/models/name";
+import { databases } from "@/models/server/config";
+import { db, filesCollection } from "@/models/name";
 import { Query } from "node-appwrite";
 import bcrypt from "bcryptjs";
 
