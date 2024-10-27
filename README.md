@@ -24,6 +24,7 @@ Upload file -> generate link with or without password protection -> share with f
 NEXT_PUBLIC_APPWRITE_HOST_URL =
 NEXT_PUBLIC_APPWRITE_PROJECT_ID =
 APPWRITE_API_KEY =
+NEXT_PUBLIC_FRONTEND_BASE_URL =
 ```
 
 4. run `npm install` to install dependencies

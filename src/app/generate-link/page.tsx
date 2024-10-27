@@ -106,7 +106,7 @@ export default function GenerateLink() {
 
       const uploadedFileDetails = await res.data;
 
-      const url = `http://localhost:3000/download-file/${uploadedFileDetails.fileId}`;
+      const url = `${process.env.NEXT_PUBLIC_FRONTEND_BASE_URL}/download-file/${uploadedFileDetails.fileId}`;
       setDownloadUrl(url);
     } catch (error: any) {
       const errMsg = error.response.data.message;

@@ -24,11 +24,11 @@ export const Footer: React.FC = () => {
       >
         <Text>&copy; QuickShare</Text>
         <Box display={"flex"} gap={"10px"} alignItems={"center"}>
-          <Link href="/linkedin">
+          <Link href="https://linkedin.com/in/luck-sharma" target="_blank">
             <LinkedinIcon height="30px" width="30px" />
           </Link>
 
-          <Link href={"https://github.com/mayank0274"}>
+          <Link href={"https://github.com/mayank0274"} target="_blank">
             <GithubIcon height="23px" width="25px" />
           </Link>
         </Box>
